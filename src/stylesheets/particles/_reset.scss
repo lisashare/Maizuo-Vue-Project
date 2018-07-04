@@ -99,12 +99,11 @@ img {
 a {
   text-decoration: none;
   font-size: 12px;
-  color: #333;
-  /*color: #08C;*/
+  color: #999;
 }
 a:hover {
-  color: #F60;
-  text-decoration: underline;
+  // color: #F60;
+  // text-decoration: underline;
   /*opacity: .9;
     filter: alpha(opacity=90)*/
 }
@@ -112,8 +111,7 @@ body {
   font-size: 14px;
   font-family: "微软雅黑,microsoft yahei";
   color: #333;
-  /*color: #404040;*/
-  background: #fff;
+  background: #ebebeb;
   -webkit-text-size-adjust: 100%;
   min-width: 320px;
 }

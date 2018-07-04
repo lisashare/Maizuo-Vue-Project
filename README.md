@@ -129,9 +129,19 @@
 2. 重置样式并引入到main.js中
 
 3. 开发了Header组件，实现了导航条的显示与隐藏
+* Header组件是每个页面都有，所以在跟组件中注入
+* 字体图标库:font-awesome(也可以根据UI给出的icon放入到assets文件中编译base64) 路径:/static...引入到index.html   nav user
+> ``` 写法 <i class="fa fa-align-justify"></i> ```
+* 导航数据循环加入，不要复制，好维护好更新，代码简洁，可读性强
+* 导航显示隐藏:v-if 可以给组件使用
+* 下载动画npm i animate.css -S  引入到根实例里面
+* transition要包在有v-if指令外面,不同时控制，让父组件传递数据给子组件，子组件自己控制
+* 通信
+点遮罩控制父组件数据，子组件控制父组件数据，传递方法，数据是父组件的，该数据的方法也应该是父组件的
+```
     Header > NavList(navs,mask)
     Header (data:isNavShow,method:closeMenu)-> NavLsit (v-if, transition)
-
+```
 4. 开发了Home组件以及Banner
     采用了，swiper滑动插件，利用Vue.nextTick来处理swiper的实例化
 
@@ -206,17 +216,6 @@
 * 采用了Vue-cli脚手架工具，创建了项目模板  vue init webpack demo,并且解析了模板中的各个文件的作用，重新搭建了项目结构
 
 * 配置了sass开发环境，主要是下载了node-sass，sass-loader -D
-
-字体图标库：font-awesome  /static...引入到index   nav user
-
-导航数据循环加入，不要复制，好维护好更新，代码简洁，可读性强
-
-导航显示隐藏:v-if 可以给组件使用
-通信
-动画animate.css
-transition要包在有v-if指令外面,不同时控制，让父组件传递数据给子组件，子组件自己控制
-
-点遮罩控制父组件数据，子组件控制父组件数据，传递方法，数据是父组件的，该数据的方法也应该是父组件的
 
 轮播图:cnpm install swiper -S 只有banner用，引入banner里面就行
 不用jquery获取轮播数据，几行代码做数据交互，其余操作dom的，vue不需要他来操作dom

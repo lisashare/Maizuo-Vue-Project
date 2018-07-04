@@ -11,6 +11,7 @@ import router from './router'
 //引入全局scss文件：为什么在js中引入scss文件可以解析
 //在webpack中有一个特性，一切皆模块，在这里,webpack检测到scss文件后会编译之后再将其拿出去的（打包的时候判断） 
 import './stylesheets/main.scss';
+import 'animate.css';
 
 //false 以阻止vue在启动时生成生产提示
 Vue.config.productionTip = true
