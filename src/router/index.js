@@ -19,6 +19,11 @@ export default new Router({
       component: Home
     },
     {
+      path:'/films',
+      name:'films',
+      component:()=>import('@/components/pages/Films/Films.vue')
+    },
+    {
       path:'/not-found',
       name:'not-found',
       component:()=>import('@/components/pages/NotFound/NotFound.vue')},

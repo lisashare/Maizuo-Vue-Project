@@ -1,16 +1,19 @@
 <template>
-  <div class="home">
-
+  <div class="home page">
+    <app-banner />
+    <movie-box />
   </div>
 </template>
 
 <script>
+import AppBanner from './Banner'
+import MovieBox from './MovieBox'
 export default {
   name: 'Home',
-  components:{},
+  components:{AppBanner,MovieBox},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: ''
     }
   }
 }

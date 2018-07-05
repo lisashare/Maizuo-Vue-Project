@@ -20,6 +20,7 @@ transition 不能嵌套，这里的遮罩和内容是分开的
         <transition  
         enter-active-class="animated slideInLeft" 
         leave-active-class="animated slideOutLeft"> 
+        <!-- 导航 -->
             <nav v-if="isNavShow" @click="closeNav">
                 <ul>
                     <li v-for="navList in navLists" :key="navList.id">
@@ -88,7 +89,6 @@ nav{
         }
     }
 }
-
 </style>
 
 

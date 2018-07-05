@@ -10,12 +10,23 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {  //代理表
+      '/mz':{ //对暗号
+        //一个配置只能处理同一个目标域的请求，配置改了要重新启动服务，开发的时候把域垮了，真正上线webpack不会跟着上线代码走，只会有打包的js，这个是不生效的，
+        //http://localhost:8080/mz/v4/api/film/now-playing
+        target:'https://m.maizuo.com/',//真正的域
+        changeOrigin:true,
+        pathRewrite:{
+          //在真正的目标url里将暗号给处理掉
+          '^/mz':''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: true,
+    autoOpenBrowser: true,  //帮我们开启浏览器
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-

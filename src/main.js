@@ -16,6 +16,10 @@ import 'animate.css';
 //false 以阻止vue在启动时生成生产提示
 Vue.config.productionTip = true
 
+//处理axios,让组件通过this.$http来使用
+import axios from 'axios'
+Vue.prototype.$http = axios;
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

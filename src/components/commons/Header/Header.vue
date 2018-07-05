@@ -1,6 +1,6 @@
 <template>
 <!-- // 外侧浮动未设置宽，都是内容撑开的
-//position: fixed;top: 0;right: 0;left: 0;width: auto;  padding:0 1em; 
+//position: fixed;top: 0;right: 0;left: 0;width: auto; // padding:0 1em; 
 点击按钮控制显示隐藏的数据，需要一个方法，在列表页面点击其他地方也可以改变隐藏的数据
 -->
     <header class="app-header">
@@ -101,7 +101,6 @@ export default {
        }
     }
 }
-
 </style>
 
 

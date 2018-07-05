@@ -16,7 +16,9 @@
     ├── src                         //资源目录,在脚手架中，开发目录是src文件夹
     ├── components                  //组件
     │   ├── commons                  //公共组件
-    │   │   ├── Header      //底部加载更多组件
+    │   │   ├── Header              //头部导航组件
+    │   │   │   ├── Header.vue               
+    │   │   │   ├── NavList.vue        
     │   │   ├── bottomLoadMore.wpy      //底部加载更多组件
     │   │   ├── placeholder.wpy         //空列表显示组件
     │   │   ├── timer.wpy               //倒计时组件
@@ -25,7 +27,10 @@
     │   │   └── wepy-swipe-delete.wpy   //左滑删除组件
     │   ├── pages    
     │   │   ├── Home                    //新增首页组件
-    │   │   │   └── Home.vue            //左滑删除组件
+    │   │   │   ├── Home.vue               
+    │   │   │   ├── Banner.vue           //轮播图组件  
+    │   │   │   ├── MovieBox.vue         //电影盒子组件                
+    │   │   │   └── MovieItem.vue        //电影项目组件
     │   │   ├── Fimes        //编辑地址组件
     │   │   │   └── Fimes.vue   //左滑删除组件
     │   │   ├── Cinema       //地址列表组件
@@ -83,7 +88,6 @@
     │   ├── setting.wpy         //设置
     │   ├── shop_cart.wpy       //购物车
     │   ├── sign_in.wpy         //签到
-    │   ├── test.wpy            //---
     │   └── wholesale.wpy       //现货批发
     ├── modules                 //插件
     │     ├── bus.js
@@ -129,6 +133,7 @@
 2. 重置样式并引入到main.js中
 
 3. 开发了Header组件，实现了导航条的显示与隐藏
+
 * Header组件是每个页面都有，所以在跟组件中注入
 * 字体图标库:font-awesome(也可以根据UI给出的icon放入到assets文件中编译base64) 路径:/static...引入到index.html   nav user
 > ``` 写法 <i class="fa fa-align-justify"></i> ```
@@ -142,8 +147,11 @@
     Header > NavList(navs,mask)
     Header (data:isNavShow,method:closeMenu)-> NavLsit (v-if, transition)
 ```
-4. 开发了Home组件以及Banner
-    采用了，swiper滑动插件，利用Vue.nextTick来处理swiper的实例化
+
+4. 开发了Home组件以及Banner   npm i swiper -S(因为轮播图之后首页有，swiper.css / js可以单独引入banner组件)
+    * 采用了，swiper滑动插件，利用Vue.nextTick来处理swiper的实例化(组件中需要引入vue)
+    * 数据交互工具npm i axios -S 引入到根实例里面，挂载在根实例的原型上，Vue.prototype.$http = axios; 每个组件都可以通过this.$http使用
+    * 实现图片懒加载优化，详细代码注释见banner组件
 
 5. Home中的电影
     经过分析，home的电影有正在热映和即将上映，初步划分四个组件，热映电影盒子、热映item，即将上映电影盒子、上映item，但是我们研究后发现，并不需要4个，一个盒子和一个item就够了，可以采取传入不同参数去实现不同效果的方式来做
@@ -152,8 +160,22 @@
 
     1. 将请求地址改为本地开发服务的域下，并加入暗号
     2. 在config/index.js->dev->proxyTable中进行暗号的匹配
+    ```
+    proxyTable: {  //代理表
+      '/mz':{ //对暗号
+        //一个配置只能处理同一个目标域的请求，配置改了要重新启动服务，开发的时候把域垮了，真正上线webpack不会跟着上线代码走，只会有打包的js，这个是不生效的，
+        //http://localhost:8080/mz/v4/api/film/now-playing
+        target:'https://m.maizuo.com/',//真正的域
+        changeOrigin:true,
+        pathRewrite:{
+          //在真正的目标url里将暗号给处理掉
+          '^/mz':''
+        }
+      }
+    }
+    ```
 
-6. 在使用item的时候。，获取到的上映时间是一个时间戳，但是需要显示的是月日格式，在这里采取了过滤器的方式来实现。
+6. 在使用item的时候，获取到的上映时间是一个时间戳，但是需要显示的是月日格式，在这里采取了过滤器的方式来实现。
 
 7. 搭建了路由跳转，做了重定向和默认路由
 
