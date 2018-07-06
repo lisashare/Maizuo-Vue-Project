@@ -24,6 +24,12 @@ export default new Router({
       component:()=>import('@/components/pages/Films/Films.vue')
     },
     {
+      path:'/detail/:id',
+      name:'detail',
+      component:()=>import('@/components/pages/Detail/Detail.vue'),
+      props: true
+    },
+    {
       path:'/not-found',
       name:'not-found',
       component:()=>import('@/components/pages/NotFound/NotFound.vue')},

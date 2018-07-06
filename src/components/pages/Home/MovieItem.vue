@@ -6,7 +6,7 @@
         </div>
         <ul>
             <li v-for = "film in films" :key = "film.id">
-                <div class="movie">
+                <router-link class="movie" tag="div" :to="{name:'detail',params:{id:film.id},query:{name:film.name}}">
                     <div class="movie-item-img img-background">
                         <img width="100%" :src = "film.cover.origin" :alt = "film.name">
                     </div>
@@ -23,7 +23,7 @@
                         <div v-if = "type.url_type=='now-playing'" class="score">{{ film.grade }}</div>
                         <div v-else class="show-date"><span>{{ film.premiereAt|premiere }}</span>上映</div>
                     </div>
-                </div>
+                </router-link>
             </li>
         </ul>
         <router-link tag="div" :to = "{name:'films'}" class="more-button">更多{{ type.title }}电影</router-link>

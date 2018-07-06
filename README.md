@@ -128,29 +128,37 @@
         └── wxRequest.js            //ajax请求
 
 
+* 采用了Vue-cli脚手架工具，创建了项目模板  vue init webpack demo,并且解析了模板中的各个文件的作用，重新搭建了项目结构
+
+* 配置了sass开发环境，主要是下载了node-sass，sass-loader -D
+
 1. 将开发的页面配置到路由器的路由表中
 
 2. 重置样式并引入到main.js中
 
 3. 开发了Header组件，实现了导航条的显示与隐藏
 
-* Header组件是每个页面都有，所以在跟组件中注入
-* 字体图标库:font-awesome(也可以根据UI给出的icon放入到assets文件中编译base64) 路径:/static...引入到index.html   nav user
-> ``` 写法 <i class="fa fa-align-justify"></i> ```
-* 导航数据循环加入，不要复制，好维护好更新，代码简洁，可读性强
-* 导航显示隐藏:v-if 可以给组件使用
-* 下载动画npm i animate.css -S  引入到根实例里面
-* transition要包在有v-if指令外面,不同时控制，让父组件传递数据给子组件，子组件自己控制
-* 通信
-点遮罩控制父组件数据，子组件控制父组件数据，传递方法，数据是父组件的，该数据的方法也应该是父组件的
+    * Header组件是每个页面都有，所以在跟组件中注入
+    * 字体图标库:font-awesome(也可以根据UI给出的icon放入到assets文件中编译base64) 路径:/static...引入到index.html   nav user
+    > ``` 写法 <i class="fa fa-align-justify"></i> ```
+    * 导航数据循环加入，不要复制，好维护好更新，代码简洁，可读性强
+    * 导航显示隐藏:v-if 可以给组件使用
+    * 下载动画npm i animate.css -S  引入到根实例里面
+    * transition要包在有v-if指令外面,不同时控制，让父组件传递数据给子组件，子组件自己控制
+    * 通信
+    点遮罩控制父组件数据，子组件控制父组件数据，传递方法，数据是父组件的，该数据的方法也应该是父组件的
 ```
     Header > NavList(navs,mask)
     Header (data:isNavShow,method:closeMenu)-> NavLsit (v-if, transition)
 ```
 
-4. 开发了Home组件以及Banner   npm i swiper -S(因为轮播图之后首页有，swiper.css / js可以单独引入banner组件)
+4. 开发了Home组件以及Banner   npm i swiper -S(只有banner用，引入banner里面就行，swiper.css / js可以单独引入banner组件),swiper是banner模块的私有变量，作用域不互通，作用域独立.如果Home里面要使用的话，也需要单独导入模块，但是webpack只打包一次，方便协同开发
     * 采用了，swiper滑动插件，利用Vue.nextTick来处理swiper的实例化(组件中需要引入vue)
-    * 数据交互工具npm i axios -S 引入到根实例里面，挂载在根实例的原型上，Vue.prototype.$http = axios; 每个组件都可以通过this.$http使用
+    >在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。Vue.nextTick([callback,context])
+
+    * 做数据交互npm i axios -S/yarn add axios -S 引入到根实例里面，挂载在根实例的原型上，Vue.prototype.$http = axios; 每个组件都可以通过this.$http使用
+    >不用jquery ajax获取轮播数据，几行代码做数据交互，其余操作dom的，vue不需要他来操作dom
+
     * 实现图片懒加载优化，详细代码注释见banner组件
 
 5. Home中的电影
@@ -203,6 +211,9 @@
 
     使用Toast 实现加载弹出效果
 
+    ** 电影列表数据获取后 **
+    film.cover.origin 这里会报错是因为，数据没有获取到渲染的时候film是空，film.cover就是undefined，可以在外层添加v-if
+
 10. 实现了进入详情页：采取路由传参的方式，将电影的id传入到detail中，detail根据id获取对应的电影的信息然后渲染
 
 11. 实现了顶部header中title的更新
@@ -211,7 +222,7 @@
 
     在详情页中，进入详情后，再去动态的更改header的title：
     
-    1.让detail路由接收电影名字的参数，这样的话我们在路由钩子就能得到这个电影的名字，直接更改
+    1. 让detail路由接收电影名字的参数，这样的话我们在路由钩子就能得到这个电影的名字，直接更改
 
     2. 在header给eventbus绑定事件以更改title，在详情detail中进入之后在生命周期钩子或者是获取到电影名字后触发小天使的事件从而更改header的title（非父子组件的通信）
 
@@ -229,23 +240,9 @@
         //vnode.context就是使用指令的元素所处的组件，binding.expression是数据的表达式
         vnode.context[binding.expression] = true/false
 
-
-    又做了一个指令v-back-top，这个指令无论是谁加上就可以触发事件来回到顶部
+ * 又做了一个指令v-back-top，这个指令无论是谁加上就可以触发事件来回到顶部
 
     接收参数来控制事件的类型
-
-
-* 采用了Vue-cli脚手架工具，创建了项目模板  vue init webpack demo,并且解析了模板中的各个文件的作用，重新搭建了项目结构
-
-* 配置了sass开发环境，主要是下载了node-sass，sass-loader -D
-
-轮播图:cnpm install swiper -S 只有banner用，引入banner里面就行
-不用jquery获取轮播数据，几行代码做数据交互，其余操作dom的，vue不需要他来操作dom
-
-axios yarn add axios -S 做数据交互
-
-swiper是banner模块的私有变量，作用域不互通，作用域独立
-如果Home里面要使用的话，也需要单独导入模块，但是webpack只打包一次，方便协同开发
 
 movieBox:用同一个组件做不同的事情，传参数
 
@@ -264,22 +261,18 @@ lazyload .babelrc更改配置  引入后使用 swiper 有自己的懒加载(右�
 films 列表页面：无限加载和提示信息，
 详情页面:film.cover.origin 这里会报错是因为，数据没有获取到渲染的时候film是空，film.cover就是undefined，可以在外层添加v-if
 
-src中main.js是入口文件，在里面创建了一个根实例，根实例的模板就是根组件App的模板，其他的组件都在根组件里面进行嵌套实现
+#### src中main.js是入口文件，在里面创建了一个根实例，根实例的模板就是根组件App的模板，其他的组件都在根组件里面进行嵌套实现
 > 配置基本的文件夹：
 
-每一个组件都是一个单文件组件，这种文件会被webpack利用vue-loader的工具进行编译
+* 每一个组件都是一个单文件组件，这种文件会被webpack利用vue-loader的工具进行编译
 
-template部分负责写组件的模板内容，script中创建组件。style里写组件的样式
+* template部分负责写组件的模板内容，script中创建组件。style里写组件的样式
 
-assets目录也是静态目录，在这个目标中的文件我们使用相对路径引入,而static目录中的文件使用绝对地址来引入
+* assets目录也是静态目录，在这个目标中的文件我们使用相对路径引入,而static目录中的文件使用绝对地址来引入
 
-在style上添加scoped能使这个style里的样式只作用于当前的组件，不加scoped就是全局样式
+* 在style上添加scoped能使这个style里的样式只作用于当前的组件，不加scoped就是全局样式
 
-习惯于在App.vue根组件的style里写全局样式，而每个组件的style最好都是局部的
-
-配置sass编译环境node-sass  sass-loader
-
-在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。Vue.nextTick([callback,context])
+* 习惯于在App.vue根组件的style里写全局样式，而每个组件的style最好都是局部的
 
 #### 移动端布局一些注意事项
 
