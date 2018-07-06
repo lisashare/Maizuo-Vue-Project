@@ -4,6 +4,9 @@
 //设置页面的rem的计算，放在最上面
 import './modules/rem'
 
+//filter premiere
+import './modules/filter'
+
 import Vue from 'vue'
 import App from './App' //引入app模块
 import router from './router'

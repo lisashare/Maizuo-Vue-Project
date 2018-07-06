@@ -21,7 +21,7 @@
                         </div>
                         <!-- 根据类型区分显示内容 -->
                         <div v-if = "type.url_type=='now-playing'" class="score">{{ film.grade }}</div>
-                        <div v-else class="show-date"><span>{{ film.premiereAt }}</span>上映</div>
+                        <div v-else class="show-date"><span>{{ film.premiereAt|premiere }}</span>上映</div>
                     </div>
                 </div>
             </li>
