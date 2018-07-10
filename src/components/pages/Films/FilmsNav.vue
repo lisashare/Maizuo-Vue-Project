@@ -1,8 +1,8 @@
 <template>
     <div class="film-list-nav clearfix">
         <div v-for = "_nav in navs" :key = "_nav.id"
-        class="nav-theme" :class = "{choosing:type===_nav.type}" 
-        @click = "changeType(_nav.type)">
+            class="nav-theme" :class = "{choosing:type===_nav.type}" 
+            @click = "changeType(_nav.type)">
             {{ _nav.theme }}
         </div>
     </div>
