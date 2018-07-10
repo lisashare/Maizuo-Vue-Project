@@ -30,6 +30,17 @@ export default new Router({
       props: true
     },
     {
+      path:'/mine',
+      name:'mine',
+      component:()=>import('@/components/pages/Mine/Mine.vue'),
+      children:[
+        {path:'user',name:'user',component:()=>import('@/components/pages/Mine/User/User.vue')},
+        {path:'register',name:'register',component:()=>import('@/components/pages/Mine/Register/Register.vue')},
+        {path:'login',name:'login',component:()=>import('@/components/pages/Mine/Login/Login.vue')},
+        {path:'my',name:'my',component:()=>import('@/components/pages/Mine/My/My.vue')}
+      ]
+    },
+    {
       path:'/not-found',
       name:'not-found',
       component:()=>import('@/components/pages/NotFound/NotFound.vue')},
