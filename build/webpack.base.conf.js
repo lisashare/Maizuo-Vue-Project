@@ -8,8 +8,6 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
@@ -80,3 +78,6 @@ module.exports = {
     child_process: 'empty'
   }
 }
+
+
+

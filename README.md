@@ -159,7 +159,7 @@
     * 做数据交互npm i axios -S/yarn add axios -S 引入到根实例里面，挂载在根实例的原型上，Vue.prototype.$http = axios; 每个组件都可以通过this.$http使用
     >不用jquery ajax获取轮播数据，几行代码做数据交互，其余操作dom的，vue不需要他来操作dom
 
-    * 实现图片懒加载优化，详细代码注释见banner组件
+    * 实现图片懒加载优化，详细代码注释见banner组件，引入后使用 swiper 有自己的懒加载(右键查看源代码)
 
 5. Home中的电影
     经过分析，home的电影有正在热映和即将上映，初步划分四个组件，热映电影盒子、热映item，即将上映电影盒子、上映item，但是我们研究后发现，并不需要4个，一个盒子和一个item就够了，可以采取传入不同参数去实现不同效果的方式来做
@@ -211,9 +211,6 @@
 
     使用Toast 实现加载弹出效果
 
-    ** 电影列表数据获取后 **
-    film.cover.origin 这里会报错是因为，数据没有获取到渲染的时候film是空，film.cover就是undefined，可以在外层添加v-if
-
 10. 实现了进入详情页：采取路由传参的方式，将电影的id传入到detail中，detail根据id获取对应的电影的信息然后渲染
 
 11. 实现了顶部header中title的更新
@@ -244,6 +241,8 @@
 
     接收参数来控制事件的类型
 
+13. Mine 创建一个store从本地缓存中读取，Mine页面通过watch监听userInfo的信息，判断显示登录页面还是个人中心页面
+
 movieBox:用同一个组件做不同的事情，传参数
 
 导航列表切换路由的时候回去,
@@ -256,12 +255,13 @@ Title 点击获取不同的数据(传参，关键数据) 挂载在这里会形�
 mobile: mint-ui   quickstart按需加载babel-plugin-component-D
 
 Mine页面( element-ui)
-lazyload .babelrc更改配置  引入后使用 swiper 有自己的懒加载(右键查看源代码)
+lazyload .babelrc更改配置  
 
 films 列表页面：无限加载和提示信息，
 详情页面:film.cover.origin 这里会报错是因为，数据没有获取到渲染的时候film是空，film.cover就是undefined，可以在外层添加v-if
 
 #### src中main.js是入口文件，在里面创建了一个根实例，根实例的模板就是根组件App的模板，其他的组件都在根组件里面进行嵌套实现
+
 > 配置基本的文件夹：
 
 * 每一个组件都是一个单文件组件，这种文件会被webpack利用vue-loader的工具进行编译

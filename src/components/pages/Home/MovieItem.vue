@@ -8,7 +8,7 @@
             <li v-for = "film in films" :key = "film.id">
                 <router-link class="movie" tag="div" :to="{name:'detail',params:{id:film.id},query:{name:film.name}}">
                     <div class="movie-item-img img-background">
-                        <img width="100%" :src = "film.cover.origin" :alt = "film.name">
+                        <img width="100%" :src="film.cover.origin" :alt = "film.name">
                     </div>
                     <div class="desc clearfix">
                         <div class="info">
@@ -131,6 +131,10 @@ export default {
             font-size:10px;
             border-radius: 5px;
         }
+    }
+    .movie-item-img{
+        width:341px;
+        height:191.81px;
     }
 </style>
 

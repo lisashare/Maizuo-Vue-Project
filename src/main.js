@@ -10,6 +10,8 @@ import './modules/filter'
 import Vue from 'vue'
 import App from './App' //引入app模块
 import router from './router'
+//vuex
+import store from './store'
 
 //引入全局scss文件：为什么在js中引入scss文件可以解析
 //在webpack中有一个特性，一切皆模块，在这里,webpack检测到scss文件后会编译之后再将其拿出去的（打包的时候判断） 
@@ -23,11 +25,20 @@ Vue.config.productionTip = true
 import axios from 'axios'
 Vue.prototype.$http = axios;
 
+import { Toast,Lazyload,InfiniteScroll } from 'mint-ui'
+//Vue.use会查找插件对象里的install方法去执行，并且给install方法里传入Vue对象
+Vue.use(Lazyload);
+Vue.use(InfiniteScroll);
+Vue.use(Toast);
+
+// Vue.component('loading', Lazyload);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   //在这里配置router是为了让路由里所有的组件都能使用到$router/$route的api
   router,
+  store,
   //组件在使用之前，必须要注册一下才能用
   components: { App },
   template: '<App/>'

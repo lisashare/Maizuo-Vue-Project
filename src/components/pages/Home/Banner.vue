@@ -1,7 +1,7 @@
 <template>
     <div class="app-banner swiper-container">
         <div class="swiper-wrapper img-background">
-            <div class="swiper-slide img-background" 
+            <div class="swiper-slide img-background" v-if = "banner.imageUrl" 
                 v-for = "banner in banners" 
                 :key = "banner.id">
                 <img 
@@ -15,6 +15,7 @@
                 <img class="swiper-lazy" data-src="https://pic.maizuo.com/usr/movie/3b1159a089ef23011923c35b42a2f499.jpg">
                 <div class="swiper-lazy-preloader"></div>
             </div>
+           
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
@@ -57,9 +58,10 @@ export default {
                         clickable: true
                     },
                     autoplay: {
-                        delay: 2500,
+                        delay: 5000,
                         disableOnInteraction: false, //触碰后自动切换也不会停止
                     },
+                    loop:true,
                     lazy:{  
                         /* 
                         * 设置为true -> 开启图片延迟加载
@@ -67,10 +69,8 @@ export default {
                         * <div class="swiper-lazy-preloader"></div>懒加载的gif
                         * 如果直接用div，设置background，对应的改为data-background即可
                         */
-                        lazyLoading: true,
-                        lazyLoadingInPrevNext : true, 
-                        // 这个为true时，↓才有用
-                        // lazyLoadingInPrevNextAmount: 4 // 设置在延迟加载图片时提前多少个slide
+                        lazyLoading: true,//启动延迟加载
+
                     }
                 })
             })
