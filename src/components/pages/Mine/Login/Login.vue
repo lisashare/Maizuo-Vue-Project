@@ -108,19 +108,18 @@ export default {
         onSubmit(){
             if(this.checkphone() && this.checkvercode()){
                 //注册成功--提示--跳转到用户名登录
-                
+               this.$http.get('../../../../../static/Json/api.json').then(res=>{
+                    if(res.data.code === 200){ 
+                        this.$router.push('user')
+                    }else{
+                        Toast({
+                            message: '注册失败.请稍后再试',
+                            position: 'middle',
+                            duration: 2000
+                        });
+                    }
+                }) 
             }
-            // var formMess=this.formMess
-            // Axios.post(api+"/order/select/reception", formMess)
-            // .then(function (res) {
-            //     if(res.data.code==200){
-            //         console.log(res.data.data);
-            //         this.productResult=res.data.data;
-            //         this.productResult.length=3;
-            //     }else if(res.data.code==400){
-            //         alert(res.data.message)
-            //     }            
-            // }.bind(this))
         } 
     }
 }        

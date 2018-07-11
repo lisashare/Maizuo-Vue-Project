@@ -50,6 +50,7 @@
     </div>
 </template>
 <script>
+import { Toast } from 'mint-ui';
 export default {
     name:'Register',
     directives: {
@@ -159,13 +160,22 @@ export default {
         },
         onSendVerCode(){
             if(this.checkphone()){
+                let {phone} = this;
                 this.time=60;
                 this.disabled=true;
                 this.timer();
-        //     /*axios.post(url).then(
-        //         res=>{
-        //         this.phonedata=res.data;
-        //     })*/
+                this.$http.get('../../../../../static/Json/api.json',{params:{phone}}).then(
+                    res=>{
+                    if(res.data.code === 200){
+
+                    }else{
+                        Toast({
+                            message: '验证码发送失败',
+                            position: 'middle',
+                            duration: 2000
+                        });
+                    }
+                })
             }
         },
         timer () {
@@ -182,24 +192,20 @@ export default {
         onSubmit(){
             if(this.checkname() && this.checkpassword()){
                 //注册成功--提示--跳转到用户名登录
-                
+                this.$http.get('../../../../../static/Json/api.json').then(res=>{
+                    if(res.data.code === 200){ 
+                        this.$router.push('user')
+                    }else{
+                        Toast({
+                            message: '注册失败.请稍后再试',
+                            position: 'middle',
+                            duration: 2000
+                        });
+                    }
+                })
             }
-            // var formMess=this.formMess
-            // Axios.post(api+"/order/select/reception", formMess)
-            // .then(function (res) {
-            //     if(res.data.code==200){
-            //         console.log(res.data.data);
-            //         this.productResult=res.data.data;
-            //         this.productResult.length=3;
-            //     }else if(res.data.code==400){
-            //         alert(res.data.message)
-            //     }            
-            // }.bind(this))
         } 
-    },
-    computed:{
-       
-    }  
+    }
 }        
 </script>
 <style lang="scss" scoped>

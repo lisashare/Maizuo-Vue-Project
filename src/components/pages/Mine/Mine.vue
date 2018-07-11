@@ -4,8 +4,24 @@
     </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
     name:'Mine',
+    computed:mapState({
+        userInfo:state => state.user.userInfo
+    }),
+    watch:{
+        'userInfo.username':{   //监听store(本地缓存)是否存在
+            immediate:true,
+            handler(newval){
+                if(newval){
+                    this.$router.replace({name: 'my'})
+                }else{
+                    this.$router.replace({name: 'user'})
+                }
+            }
+        }
+    }
 }
 </script>
 <style lang="scss">

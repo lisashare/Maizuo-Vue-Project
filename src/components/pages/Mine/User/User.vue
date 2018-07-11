@@ -76,7 +76,27 @@ export default {
          clear02(){
             this.password = ''
         },
-        
+        onSubmit(){
+            if(this.checkname() && this.checkpassword()){
+                //注册成功--提示--跳转到用户名登录
+                let {username,password} = this;
+                let params = {username,password,callback:(result)=>{
+                                    //发起请求
+                                    if(result === 1){ 
+                                        // this.$router.push('my')
+                                    }else{
+                                        Toast({
+                                            message: '注册失败.请稍后再试',
+                                            position: 'middle',
+                                            duration: 2000
+                                        });
+                                    }
+                                }
+                            }
+                //输入信息后，调用异步actions方法
+                this.$store.dispatch('login',params)   
+            } 
+        }
     }  
 }        
 </script>
