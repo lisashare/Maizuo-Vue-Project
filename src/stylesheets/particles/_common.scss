@@ -8,3 +8,9 @@
     background-size:100% 100%;
     background-position:center center;
 }
+.img-background-gif{
+    background-image: url('/static/images/loading.gif');
+    background-size:150% 100%;
+    background-position:center center;
+    overflow: hidden;
+}

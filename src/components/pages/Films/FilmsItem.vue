@@ -1,7 +1,7 @@
 <template>
     <router-link class="films-item" tag = "li" :to = "{name:'detail',params:{id:film.id},query:{name:film.name}}">
         <div class="film-item">
-            <div class="film-item-img img-background">
+            <div class="film-item-img img-background-gif">
                 <img width="100%" :src="film.poster.origin" alt="film.name">
             </div>
             <div class="film-desc">
@@ -29,10 +29,12 @@ export default {
 <style lang="scss" scoped>
 .film-item{
     width:100%;
+    height:121px;
     padding:20px 0;
     border-bottom:1px dashed #c9c9c9;
     .film-item-img{
         width: 60px;
+        height:82.56px;
         float:left;
         overflow:hidden;
     }
