@@ -64,6 +64,10 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    a{
+        color:#fff;
+        font-size:14px;
+    }
 }
 
 .member-top{
