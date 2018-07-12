@@ -45,8 +45,9 @@ export default {
                 {id:1,title:'首页',name:'home'},
                 {id:2,title:'影片',name:'films'},
                 {id:3,title:'影院',name:'home'},
-                {id:4,title:'我的',name:'mine'},
-                {id:5,title:'卖座卡',name:'home'}
+                {id:4,title:'商城',name:'shop-mall'},
+                {id:5,title:'我的',name:'mine'},
+                {id:6,title:'卖座卡',name:'home'}
             ]
         }
     }

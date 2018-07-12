@@ -2,7 +2,7 @@
 <!-- film.cover.origin 这里会报错是因为，数据没有获取到渲染的时候film是空，film.cover就是undefined，可以在外层添加v-if -->
     <div v-if="film.name" class="detail page">
         <div class="film-img-wrap img-background">
-            <img width="100%" :src = "film.cover.origin" alt="film.name">
+            <img width="100%" :src = "film.cover.origin" :alt="film.name">
         </div>
         <div class="film-info">
             <div class="film-introduce">
@@ -22,6 +22,8 @@
     </div>
 </template>
 <script>
+import bus from '../../../modules/bus.js'
+
 export default {
     name:'Detail',
     props:['id'],
@@ -51,10 +53,15 @@ export default {
             }).then(res=>{
                 this.film = res.data.data.film;
                 this.actors = res.data.data.film.actors;
+
+                // //获取到数据后触发 方法一：这种方法在数据未获取到的时候，title显示卖座电影，获取到再执行了新的title
+                //bus.$emit('change-title',this.film.name)
             })
         }   
     },
     created () {
+        //方法二：
+        bus.$emit('change-title',this.$route.query.name)
         this.getItem()
     }
 }

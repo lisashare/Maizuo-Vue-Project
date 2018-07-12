@@ -16,10 +16,7 @@
             </div>
             <div class="city-index-detail">
                 <ul class="list-unstyled">
-                    <li class="city-item-detail">北京</li>
-                    <li class="city-item-detail">上海</li>
-                    <li class="city-item-detail">广州</li>
-                    <li class="city-item-detail">深圳</li>
+                    <li class="city-item-detail" v-for="(item,i) in hotCity" :key="i">{{ item }}</li>
                 </ul>
             </div>
         </div>
@@ -55,6 +52,7 @@ export default {
     name:'AppCity',
     data () {
         return {
+            hotCity:['北京','上海','广州','深圳'],
             english:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         }
     }
@@ -71,7 +69,7 @@ export default {
 .city-index-detail{
     background-color: #fff;
     .city-item-detail{
-        width:24%;
+        width:25%;
         font-size:16px;
         line-height:45px;
         text-align:center;
@@ -84,7 +82,6 @@ export default {
         color:#e2941a;
     }
 }
-
 </style>
 
 

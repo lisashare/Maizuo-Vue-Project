@@ -9,7 +9,7 @@
 import AppHeader from "@/components/commons/Header/Header"
 export default {
   name: 'App',
-  components:{AppHeader},
+  components:{AppHeader}
 }
 </script>
 

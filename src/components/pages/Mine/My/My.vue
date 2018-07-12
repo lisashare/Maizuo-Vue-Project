@@ -8,6 +8,7 @@
             </div>
         </div>
         <div class="member-collect">
+            <router-link to="/mine/user">登录</router-link>
             <div class="exit" @click="EXIT">注销</div>
         </div>
       </div>

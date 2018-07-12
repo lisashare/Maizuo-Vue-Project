@@ -50,7 +50,7 @@
     </div>
 </template>
 <script>
-import { Toast } from 'mint-ui';
+//import { Toast } from 'mint-ui';
 export default {
     name:'Register',
     directives: {

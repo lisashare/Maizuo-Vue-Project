@@ -36,6 +36,11 @@ var router = new Router({
       props: true
     },
     {
+      path:'/shop-mall',
+      name:'shop-mall',
+      component:()=>import('@/components/pages/ShopMall/ShopMall.vue')
+    },
+    {
       path:'/mine',
       redirect:'/mine/my',
       name:'mine',

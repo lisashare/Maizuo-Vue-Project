@@ -53,6 +53,7 @@ export default {
                 case 'my':title = '个人中心';break;
                 case 'user':title = '登录';break;
                 case 'login':title = '登录';break;
+                case 'shop-mall':title = '商城';break;
                 case 'not-found':title = '404';break;
                 //方法一：详情页中将title放在url地址中，在跳转的时候使用 
                 //case 'detail': title = to.query.name;break;

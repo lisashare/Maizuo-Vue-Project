@@ -1,21 +1,16 @@
 <template>
     <div class="app-banner swiper-container">
         <div class="swiper-wrapper img-background">
-            <div class="swiper-slide img-background" v-if = "banner.imageUrl" 
+            <div class="swiper-slide img-background" 
                 v-for = "banner in banners" 
                 :key = "banner.id">
-                <img 
+                <img v-if = "banner.imageUrl"
                     class="swiper-lazy"
                     width="100%" 
                     :data-src = "banner.imageUrl"   
-                    :alt = "banner.name">
+                    >
                 <div class="swiper-lazy-preloader"></div>
             </div>
-            <div class="swiper-slide" style="width: 100%;">
-                <img class="swiper-lazy" data-src="https://pic.maizuo.com/usr/movie/3b1159a089ef23011923c35b42a2f499.jpg">
-                <div class="swiper-lazy-preloader"></div>
-            </div>
-           
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
