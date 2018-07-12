@@ -12,13 +12,13 @@
                 <div class="toolbar-title">{{ title }}</div>
             </h1>
             <div class="nav-right">
-                <a href="" class="city">
-                    <span class="city-content">北京</span>
+                <router-link to="/city" class="city">
+                    <span class="city-content">{{city}}</span>
                     <i class="fa fa-angle-down"></i>
-                </a>
-                <a href="" class="user">
+                </router-link>
+                <router-link to="/mine" class="user">
                     <i class="fa fa-user-o"></i>
-                </a>
+                </router-link>
             </div>
         </nav>
         <!-- 列表组件 -->
@@ -29,14 +29,39 @@
 </template>
 <script>
 import NavList from './Navlist'
+import router from '../../../router'
+import bus from '../../../modules/bus.js'
+
 export default {
     name:'AppHeader',
     components:{ NavList },
     data () {
         return {
+            city:'北京',
             isNavShow:false,
             title:'卖座电影'
         }
+    },
+    created () {
+        router.beforeEach((to,from,next)=>{
+            // console.log(to) //（路由对象）里面有name属性
+            // title = to.meta.title
+            let title = '卖座电影'
+            switch (to.name) {
+                case 'films':title = '电影列表';break;
+                case 'city':title = '选择城市';break;
+                case 'my':title = '个人中心';break;
+                case 'user':title = '登录';break;
+                case 'login':title = '登录';break;
+                case 'not-found':title = '404';break;
+                //方法一：详情页中将title放在url地址中，在跳转的时候使用 
+                //case 'detail': title = to.query.name;break;
+            }
+            this.title = title
+            next()
+        })
+        //方法二
+        bus.$on('change-title',(title)=>{this.title = title})
     },
     methods:{
         closeNav () {

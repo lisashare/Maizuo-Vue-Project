@@ -7,7 +7,8 @@ import Home from '@/components/pages/Home/Home.vue'
 
 Vue.use(Router)  //注册
 
-export default new Router({
+var router = new Router({
+  module:'hash', //history需要后端设置
   routes: [
     {
       path:'',
@@ -17,6 +18,11 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home
+    },
+    {
+      path:'/city',
+      name:'city',
+      component:()=>import('@/components/pages/City/City.vue')
     },
     {
       path:'/films',
@@ -31,6 +37,7 @@ export default new Router({
     },
     {
       path:'/mine',
+      redirect:'/mine/my',
       name:'mine',
       component:()=>import('@/components/pages/Mine/Mine.vue'),
       children:[
@@ -47,3 +54,4 @@ export default new Router({
     {path:'**',redirect:'/not-found'}//通配符就是没有名字，重定向到not-found
   ]
 })
+export default router
