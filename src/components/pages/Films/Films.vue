@@ -2,6 +2,7 @@
     <div class="films page">
         <films-nav :type = "type" :change-type = "changeType"></films-nav>
         <films-box :type = "type"></films-box>
+        <back-top size="small" v-back-top:click></back-top>
     </div>
 </template>
 <script>

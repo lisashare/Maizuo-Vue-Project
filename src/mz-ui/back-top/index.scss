@@ -1,0 +1,30 @@
+.back-top-box{
+    position: fixed;
+    right:16px;
+    bottom:18px;
+    .back-top{
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+        color:#e7e7e7;
+        background:rgba($color: #000000, $alpha: 0.5);
+        font-size:32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &[size = small]{
+        .back-top{
+            width:40px;
+            height:40px;
+            font-size:32px;
+        }
+    }
+    &[size = large]{
+        .back-top{
+            width:80px;
+            height:80px;
+            font-size:64px;
+        }
+    }
+}
